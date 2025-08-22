@@ -1,137 +1,57 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+function setup() {
+  createCanvas(400, 400);
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <title>Meu portfólio</title>
-</head>
+let xJogador = [0, 0, 0, 0];
+let yJogador = [75, 150, 225, 300];
+let jogador = ["😎", "❤️", "👽", "🚘"];
+let teclas = ["a", "s", "d", "f"];
+let quantidade = jogador.length;
 
-<body>
-    <header class="container text-center">
-        <img src="img/perfil.png" alt="foto_de_perfil" width="150" height="150">
-        <p class="main">Eu sou Ryan</p>
-        <h1>Eu estou estudando programação com Alura!</h1>
-        <p>Minhas habilidades</p>
-        <div>
-            <p class="badge bg-secondary">HTML</p>
-            <p class="badge bg-secondary">CSS</p>
-            <p class="badge bg-secondary">JavaScript</p>
-            <p class="badge bg-secondary">Scratch</p>
-        </div>
-    </header>
-    
-    <div class="titulo"><h2>PROJETOS</h2></div>    
-    
-    <main class="container mt-5">
-        <div class="row">
-<!-- Projeto 1 - PING PONG NO P5JS-->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="img/projeto-1.png" class="card-img-top" alt="Imagem do projeto do Pong">
-                    <div class="card-body">
-                        <h5 class="card-title">Ping Pong</h5>
-                        <p class="card-text">Este projeto chamado "Ping Pong" foi desenvolvido em HTML, CSS e dando destaque ao JS com a biblioteca p5js
-                        </p>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modal1">Acesse o projeto!</button>
-                    </div>
-                </div>
-            </div>
-            
-<!-- Projeto 2 - Copa Pistão-->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="img/projeto-2.png" class="card-img-top" alt="Imagem do projeto do Filme">
-                    <div class="card-body">
-                        <h5 class="card-title">Copa Pistão</h5>
-                        <p class="card-text">Este projeto chamado "Corrida" foi desenvolvido em HTML, CSS e JS com a biblioteca p5js</p>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modal2">Acesse o projeto!</button>
-                    </div>
-                </div>
-            </div>
+function draw() {
+  ativaJogo();
+  desenhaJogadores();
+  desenhaLinhaDeChegada();
+  verificaVencedor();
+}
 
-<!-- Projeto 3 - Quente ou Frio-->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="img/projeto-3.png" class="card-img-top" alt="Imagem do projeto do Quente ou Frio">
-                    <div class="card-body">
-                        <h5 class="card-title">Quente ou Frio</h5>
-                        <p class="card-text">Este projeto chamado "Quente ou Frio" foi desenvolvido em HTML, CSS e JS com a biblioteca p5js</p>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modal3">Acesse o projeto!</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+function ativaJogo() {
+  if (focused == true) {
+    background("#D2EBB5");
+  } else {
+    background("rgb(238,178,178)");
+  }
+}
 
-<!--"Veja o projeto" 1-->
-    <div class="modal" id="modal1" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ping Pong</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>O projeto Ping Pong busca uma vibe retro,em que, traz o jogo Pong da decada de 90 e com um objetivo simples, quem tiver mais pontos ganha!.</p>
-                    <img src="img/projeto-1.png" class="img-fluid w-100"
-                        alt="imagem do Ping Pong">
-                </div>
-                <div class="modal-footer">
-                    <a href="https://ryandias24.github.io/js-pong/">Teste o projeto!</a>
-                    <a href="https://github.com/RyanDias24/js-pong">Código no Git!</a>
-                </div>
-            </div>
-        </div>
-    </div>
+function desenhaJogadores() {
+  textSize(40);
+  for (let i = 0; i < quantidade; i++) {
+    text(jogador[i], xJogador[i], yJogador[i]);
+  }
+}
 
-<!-- "Veja o projeto" 2 -->
-    <div class="modal" id="modal2" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Copa Pistão</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>O projeto consiste em uma corrida de vários veículos em busca do primeiro lugar!</p>
-                    <img src="img/projeto-2.png" class="img-fluid w-100" alt="imagem da copa pistão">
-                </div>
-                <div class="modal-footer">
-                    <a href="https://ryandias24.github.io/Corrida-em-JS/">Teste o projeto!</a>
-                    <a href="https://github.com/RyanDias24/Corrida-em-JS">Código no Git!</a>
-                </div>
-            </div>
-        </div>
-    </div>
+function desenhaLinhaDeChegada() {
+  fill("white");
+  rect(350, 0, 10, 400);
+  fill("black");
+  for (let yAtual = 0; yAtual < 400; yAtual += 20) {
+    rect(350, yAtual, 10, 10);
+  }
+}
 
-<!-- "Veja o projeto" 3 -->
-    <div class="modal" id="modal3" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Quente e Frio</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>O projeto é uma ideia simples que consiste em chegar mais próximo do quente e vencer!.</p>
-                    <img src="img/projeto-3.png" alt="imagem do Quente ou Frio" class="img-fluid w-100">
-                </div>
-                <div class="modal-footer">
-                    <a href="https://ryandias24.github.io/Quente-ou-Frio-js/">Teste o projeto!</a>
-                    <a href="https://github.com/RyanDias24/Quente-ou-Frio-js">Código no Git!</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="container py-5">
-        <p class="my-5 text-center">© Copyright 2025 - Docente Rafael</p>
-    </footer>
+function verificaVencedor() {
+  for (let i = 0; i < quantidade; i++) {
+    if (xJogador[i] > 350) {
+      text(jogador[i] + " venceu!", 50, 200);
+      noLoop();
+    }
+  }
+}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+function keyReleased() {
+  for (let i = 0; i < quantidade; i++) {
+    if (key == teclas[i]) {
+      xJogador[i] += random(20);
+    }
+  }
+}
